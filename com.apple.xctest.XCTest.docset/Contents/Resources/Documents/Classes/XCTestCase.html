@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>XCTestCase Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">XCTest </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Apple</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/continueAfterFailure">continueAfterFailure</option>
+		
+		<option value="//api/name/invocation">invocation</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/defaultPerformanceMetrics">+ defaultPerformanceMetrics</option>
+		
+		<option value="//api/name/defaultTestSuite">+ defaultTestSuite</option>
+		
+		<option value="//api/name/setUp">+ setUp</option>
+		
+		<option value="//api/name/tearDown">+ tearDown</option>
+		
+		<option value="//api/name/testCaseWithInvocation:">+ testCaseWithInvocation:</option>
+		
+		<option value="//api/name/testCaseWithSelector:">+ testCaseWithSelector:</option>
+		
+		<option value="//api/name/testInvocations">+ testInvocations</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/expectationForNotification:object:handler:">- expectationForNotification:object:handler:</option>
+		
+		<option value="//api/name/expectationWithDescription:">- expectationWithDescription:</option>
+		
+		<option value="//api/name/initWithInvocation:">- initWithInvocation:</option>
+		
+		<option value="//api/name/initWithSelector:">- initWithSelector:</option>
+		
+		<option value="//api/name/invokeTest">- invokeTest</option>
+		
+		<option value="//api/name/keyValueObservingExpectationForObject:keyPath:expectedValue:">- keyValueObservingExpectationForObject:keyPath:expectedValue:</option>
+		
+		<option value="//api/name/keyValueObservingExpectationForObject:keyPath:handler:">- keyValueObservingExpectationForObject:keyPath:handler:</option>
+		
+		<option value="//api/name/measureBlock:">- measureBlock:</option>
+		
+		<option value="//api/name/measureMetrics:automaticallyStartMeasuring:forBlock:">- measureMetrics:automaticallyStartMeasuring:forBlock:</option>
+		
+		<option value="//api/name/recordFailureWithDescription:inFile:atLine:expected:">- recordFailureWithDescription:inFile:atLine:expected:</option>
+		
+		<option value="//api/name/startMeasuring">- startMeasuring</option>
+		
+		<option value="//api/name/stopMeasuring">- stopMeasuring</option>
+		
+		<option value="//api/name/waitForExpectationsWithTimeout:handler:">- waitForExpectationsWithTimeout:handler:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">XCTestCase Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/XCTest.html">XCTest</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>XCTestCase.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<ul>
+<li>@class XCTestCase</li>
+<li>XCTestCase is a concrete subclass of <a href="../Classes/XCTest.html">XCTest</a> that should be the override point for</li>
+<li>most developers creating tests for their projects. A test case subclass can have</li>
+<li>multiple test methods and supports setup and tear down that executes for every test</li>
+<li>method as well as class level setup and tear down.
+*</li>
+<li>To define a test case:
+*</li>
+<li>• Create a subclass of XCTestCase.</li>
+<li>• Implement -test methods.</li>
+<li>• Optionally define instance variables or properties that store the state of the test.</li>
+<li>• Optionally initialize state by overriding <a href="#//api/name/setUp">setUp</a></li>
+<li>• Optionally clean-up after a test by overriding <a href="#//api/name/tearDown">tearDown</a>.
+*</li>
+<li>Test methods are instance methods meeting these requirements:</li>
+<li>• accepting no parameters</li>
+<li>• returning no value</li>
+<li>• prefixed with &lsquo;test&rsquo;
+*</li>
+<li><p>For example:</p>
+
+<ul>
+<li>(void)testSomething;</li>
+</ul>
+</li>
+<li><p>Test methods are automatically recognized as test cases by the <a href="../Classes/XCTest.html">XCTest</a> framework.</p></li>
+<li>Each XCTestCase subclass&rsquo;s <a href="#//api/name/defaultTestSuite">defaultTestSuite</a> is a <a href="../Classes/XCTestSuite.html">XCTestSuite</a> which includes theses</li>
+<li>tests. Test method implementations usually contain assertions that must be verified</li>
+<li><p>for the test to pass, for example:</p>
+
+<p>  @interface MathTest : XCTestCase {
+  @private
+      float f1;
+      float f2;
+  }</p>
+
+<ul>
+<li>(void)testAddition;</li>
+</ul>
+
+
+<p>  @end</p>
+
+<p>  @implementation MathTest</p>
+
+<ul>
+<li><p>(void)<a href="#//api/name/setUp">setUp</a>
+{
+  f1 = 2.0;
+  f2 = 3.0;
+}</p></li>
+<li><p>(void)testAddition
+{
+  XCTAssertTrue (f1 + f2 == 5.0);
+}
+@end</p></li>
+</ul>
+</li>
+</ul>
+
+
+<p>@category AsynchronousTesting</p>
+
+<p>@discussion
+This category introduces support for asynchronous testing in XCTestCase. The mechanism
+allows you to specify one or more &ldquo;expectations&rdquo; that will occur asynchronously
+as a result of actions in the test. Once all expectations have been set, a &ldquo;wait&rdquo;
+API is called that will block execution of subsequent test code until all expected
+conditions have been fulfilled or a timeout occurs.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/testCaseWithInvocation:" title="testCaseWithInvocation:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/testCaseWithInvocation:">+&nbsp;testCaseWithInvocation:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +testCaseWithInvocation:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (id)testCaseWithInvocation:(NSInvocation *)<em>invocation</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +testCaseWithInvocation:</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithInvocation:" title="initWithInvocation:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithInvocation:">&ndash;&nbsp;initWithInvocation:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -initWithInvocation:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id)initWithInvocation:(NSInvocation *)<em>invocation</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -initWithInvocation:</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/testCaseWithSelector:" title="testCaseWithSelector:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/testCaseWithSelector:">+&nbsp;testCaseWithSelector:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +testCaseWithSelector:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (id)testCaseWithSelector:(SEL)<em>selector</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +testCaseWithSelector:</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithSelector:" title="initWithSelector:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithSelector:">&ndash;&nbsp;initWithSelector:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -initWithSelector:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id)initWithSelector:(SEL)<em>selector</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -initWithSelector:</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/invocation" title="invocation"></a>
+	<h3 class="method-title"><code><a href="#//api/name/invocation">&nbsp;&nbsp;invocation</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@property invocation
+The invocation used when this test is run.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (strong) NSInvocation *invocation</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@property invocation
+The invocation used when this test is run.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/invokeTest" title="invokeTest"></a>
+	<h3 class="method-title"><code><a href="#//api/name/invokeTest">&ndash;&nbsp;invokeTest</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -invokeTest
+Invoking a test performs its <a href="#//api/name/setUp">setUp</a>, <a href="#//api/name/invocation">invocation</a>, and <a href="#//api/name/tearDown">tearDown</a>. In general this
+should not be called directly.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)invokeTest</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -invokeTest
+Invoking a test performs its <a href="#//api/name/setUp">setUp</a>, <a href="#//api/name/invocation">invocation</a>, and <a href="#//api/name/tearDown">tearDown</a>. In general this
+should not be called directly.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/continueAfterFailure" title="continueAfterFailure"></a>
+	<h3 class="method-title"><code><a href="#//api/name/continueAfterFailure">&nbsp;&nbsp;continueAfterFailure</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@property continueAfterFailure
+The test case behavior after a failure. Defaults to YES.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property BOOL continueAfterFailure</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@property continueAfterFailure
+The test case behavior after a failure. Defaults to YES.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/recordFailureWithDescription:inFile:atLine:expected:" title="recordFailureWithDescription:inFile:atLine:expected:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recordFailureWithDescription:inFile:atLine:expected:">&ndash;&nbsp;recordFailureWithDescription:inFile:atLine:expected:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -recordFailureWithDescription:inFile:atLine:expected:
+Records a failure in the execution of the test and is used by all test assertions.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)recordFailureWithDescription:(NSString *)<em>description</em> inFile:(NSString *)<em>filePath</em> atLine:(NSUInteger)<em>lineNumber</em> expected:(BOOL)<em>expected</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>description</code></th>
+						<td><p>The description of the failure being reported.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>filePath</code></th>
+						<td><p>The file path to the source file where the failure being reported
+was encountered.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>lineNumber</code></th>
+						<td><p>The line number in the source file at filePath where the
+failure being reported was encountered.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expected</code></th>
+						<td><p>YES if the failure being reported was the result of a failed assertion,
+NO if it was the result of an uncaught exception.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -recordFailureWithDescription:inFile:atLine:expected:
+Records a failure in the execution of the test and is used by all test assertions.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/testInvocations" title="testInvocations"></a>
+	<h3 class="method-title"><code><a href="#//api/name/testInvocations">+&nbsp;testInvocations</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +testInvocations
+Invocations for each test method in the test case.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSArray *)testInvocations</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +testInvocations
+Invocations for each test method in the test case.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultPerformanceMetrics" title="defaultPerformanceMetrics"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultPerformanceMetrics">+&nbsp;defaultPerformanceMetrics</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +defaultPerformanceMetrics
+The names of the performance metrics to measure when invoking <a href="#//api/name/measureBlock:">measureBlock:</a>. Returns XCTPerformanceMetric_WallClockTime by default. Subclasses can override this to change the behavior of <a href="#//api/name/measureBlock:">measureBlock:</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSArray *)defaultPerformanceMetrics</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +defaultPerformanceMetrics
+The names of the performance metrics to measure when invoking <a href="#//api/name/measureBlock:">measureBlock:</a>. Returns XCTPerformanceMetric_WallClockTime by default. Subclasses can override this to change the behavior of <a href="#//api/name/measureBlock:">measureBlock:</a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/measureBlock:" title="measureBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/measureBlock:">&ndash;&nbsp;measureBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<ul>
+<li>@method -measureBlock:
+*</li>
+<li>Call from a test method to measure resources (<a href="#//api/name/defaultPerformanceMetrics">defaultPerformanceMetrics</a>) used by the</li>
+<li>block in the current process.</li>
+</ul>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)measureBlock:(void ( ^ ) ( void ))<em>block</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<ul>
+<li>@method -measureBlock:
+*</li>
+<li>Call from a test method to measure resources (<a href="#//api/name/defaultPerformanceMetrics">defaultPerformanceMetrics</a>) used by the</li>
+<li><p>block in the current process.</p>
+
+<ul>
+<li><p>(void)testPerformanceOfMyFunction {</p>
+
+<pre><code>  [self measureBlock:^{
+  // Do that thing you want to measure.
+  MyFunction();
+</code></pre>
+
+<p>  }];
+}</p></li>
+</ul>
+</li>
+<li><p>@param block A block whose performance to measure.</p></li>
+</ul>
+
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/measureMetrics:automaticallyStartMeasuring:forBlock:" title="measureMetrics:automaticallyStartMeasuring:forBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/measureMetrics:automaticallyStartMeasuring:forBlock:">&ndash;&nbsp;measureMetrics:automaticallyStartMeasuring:forBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<ul>
+<li>@method -measureMetrics:automaticallyStartMeasuring:forBlock:
+*</li>
+<li>Call from a test method to measure resources (XCTPerformanceMetrics) used by the</li>
+<li>block in the current process. Each metric will be measured across calls to the block.</li>
+<li>The number of times the block will be called is undefined and may change in the</li>
+<li>future. For one example of why, as long as the requested performance metrics do</li>
+<li>not interfere with each other the API will measure all metrics across the same</li>
+<li>calls to the block. If the performance metrics may interfere the API will measure</li>
+<li>them separately.</li>
+</ul>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)measureMetrics:(NSArray *)<em>metrics</em> automaticallyStartMeasuring:(BOOL)<em>automaticallyStartMeasuring</em> forBlock:(void ( ^ ) ( void ))<em>block</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<ul>
+<li>@method -measureMetrics:automaticallyStartMeasuring:forBlock:
+*</li>
+<li>Call from a test method to measure resources (XCTPerformanceMetrics) used by the</li>
+<li>block in the current process. Each metric will be measured across calls to the block.</li>
+<li>The number of times the block will be called is undefined and may change in the</li>
+<li>future. For one example of why, as long as the requested performance metrics do</li>
+<li>not interfere with each other the API will measure all metrics across the same</li>
+<li>calls to the block. If the performance metrics may interfere the API will measure</li>
+<li><p>them separately.</p>
+
+<ul>
+<li><p>(void)testMyFunction2_WallClockTime {
+  [self measureMetrics:[[self class] defaultPerformanceMetrics] automaticallyStartMeasuring:NO forBlock:^{</p>
+
+<pre><code>  // Do setup work that needs to be done for every iteration but you don't want to measure before the call to -startMeasuring
+  SetupSomething();
+  [self startMeasuring];
+
+  // Do that thing you want to measure.
+  MyFunction();
+  [self stopMeasuring];
+
+  // Do teardown work that needs to be done for every iteration but you don't want to measure after the call to stopMeasuring
+  TeardownSomething();
+</code></pre>
+
+<p>  }];
+}</p></li>
+</ul>
+</li>
+<li><p>Caveats:</p></li>
+<li>• If YES was passed for automaticallyStartMeasuring and <a href="#//api/name/startMeasuring">startMeasuring</a> is called</li>
+<li>   anyway, the test will fail.</li>
+<li>• If NO was passed for automaticallyStartMeasuring then <a href="#//api/name/startMeasuring">startMeasuring</a> must be</li>
+<li>   called once and only once before the end of the block or the test will fail.</li>
+<li>• If <a href="#//api/name/stopMeasuring">stopMeasuring</a> is called multiple times during the block the test will fail.
+*</li>
+<li>@param metrics An array of NSStrings (XCTPerformanceMetrics) to measure. Providing an unrecognized string is a test failure.
+*</li>
+<li>@param automaticallyStartMeasuring If NO, XCTestCase will not take any measurements until <a href="#//api/name/startMeasuring">startMeasuring</a> is called.
+*</li>
+<li>@param block A block whose performance to measure.</li>
+</ul>
+
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startMeasuring" title="startMeasuring"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startMeasuring">&ndash;&nbsp;startMeasuring</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -startMeasuring
+Call this from within a measure block to set the beginning of the critical section.
+Measurement of metrics will start at this point.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startMeasuring</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -startMeasuring
+Call this from within a measure block to set the beginning of the critical section.
+Measurement of metrics will start at this point.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopMeasuring" title="stopMeasuring"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopMeasuring">&ndash;&nbsp;stopMeasuring</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -stopMeasuring
+Call this from within a measure block to set the ending of the critical section.
+Measurement of metrics will stop at this point.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stopMeasuring</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -stopMeasuring
+Call this from within a measure block to set the ending of the critical section.
+Measurement of metrics will stop at this point.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="AsynchronousTesting Methods" name="task_AsynchronousTesting Methods"></a>
+						<h2 class="task-title">AsynchronousTesting Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/expectationWithDescription:" title="expectationWithDescription:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/expectationWithDescription:">&ndash;&nbsp;expectationWithDescription:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +expectationWithDescription:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (XCTestExpectation *)expectationWithDescription:(NSString *)<em>description</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +expectationWithDescription:</p>
+
+<p>@param description
+This string will be displayed in the test log to help diagnose failures.</p>
+
+<p>@discussion
+Creates and returns an expectation associated with the test case.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTextCase+AsynchronousTesting.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/waitForExpectationsWithTimeout:handler:" title="waitForExpectationsWithTimeout:handler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/waitForExpectationsWithTimeout:handler:">&ndash;&nbsp;waitForExpectationsWithTimeout:handler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method -waitForExpectationsWithTimeout:handler:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)waitForExpectationsWithTimeout:(NSTimeInterval)<em>timeout</em> handler:(XCWaitCompletionHandler)<em>handlerOrNil</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method -waitForExpectationsWithTimeout:handler:</p>
+
+<p>@param timeout
+The amount of time within which all expectations must be fulfilled.</p>
+
+<p>@param handlerOrNil
+If provided, the handler will be invoked both on timeout or fulfillment of all
+expectations. Timeout is always treated as a test failure.</p>
+
+<p>@discussion
+-waitForExpectationsWithTimeout:handler: creates a point of synchronization in the flow of a
+test. Only one -waitForExpectationsWithTimeout:handler: can be active at any given time, but
+multiple discrete sequences of { expectations -> wait } can be chained together.</p>
+
+<p>-waitForExpectationsWithTimeout:handler: runs the run loop while handling events until all expectations
+are fulfilled or the timeout is reached. Clients should not manipulate the run
+loop while using this API.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTextCase+AsynchronousTesting.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/keyValueObservingExpectationForObject:keyPath:expectedValue:" title="keyValueObservingExpectationForObject:keyPath:expectedValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/keyValueObservingExpectationForObject:keyPath:expectedValue:">&ndash;&nbsp;keyValueObservingExpectationForObject:keyPath:expectedValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method keyValueObservingExpectationForObject:keyPath:expectedValue:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (XCTestExpectation *)keyValueObservingExpectationForObject:(id)<em>objectToObserve</em> keyPath:(NSString *)<em>keyPath</em> expectedValue:(id)<em>expectedValue</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method keyValueObservingExpectationForObject:keyPath:expectedValue:</p>
+
+<p>@discussion
+A convenience method for asynchronous tests that use Key Value Observing to detect changes
+to values on an object. This variant takes an expected value and observes changes on the object
+until the keyPath&rsquo;s value matches the expected value using [NSObject isEqual:]. If
+other comparisions are needed, use the variant below that takes a handler block.</p>
+
+<p>@param objectToObserve
+The object to observe.</p>
+
+<p>@param keyPath
+The key path to observe.</p>
+
+<p>@param expectedValue
+Expected value of the keyPath for the object. The expectation will fulfill itself when the
+keyPath is equal, as tested using [NSObject isEqual:]. If nil, the expectation will be
+fulfilled by the first change to the key path of the observed object.</p>
+
+<p>@return
+Creates and returns an expectation associated with the test case.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTextCase+AsynchronousTesting.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/keyValueObservingExpectationForObject:keyPath:handler:" title="keyValueObservingExpectationForObject:keyPath:handler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/keyValueObservingExpectationForObject:keyPath:handler:">&ndash;&nbsp;keyValueObservingExpectationForObject:keyPath:handler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method keyValueObservingExpectationForObject:keyPath:handler:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (XCTestExpectation *)keyValueObservingExpectationForObject:(id)<em>objectToObserve</em> keyPath:(NSString *)<em>keyPath</em> handler:(XCKeyValueObservingExpectationHandler)<em>handlerOrNil</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method keyValueObservingExpectationForObject:keyPath:handler:</p>
+
+<p>@discussion
+Variant of the convenience for tests that use Key Value Observing. Takes a handler
+block instead of an expected value. Every KVO change will run the handler block until
+it returns YES (or the wait times out). Returning YES from the block will fulfill the
+expectation. XCTAssert and related APIs can be used in the block to report a failure.</p>
+
+<p>@param objectToObserve
+The object to observe.</p>
+
+<p>@param keyPath
+The key path to observe.</p>
+
+<p>@param handlerOrNil
+Optional handler, /see <a href="../Blocks/XCKeyValueObservingExpectationHandler.html">XCKeyValueObservingExpectationHandler</a>. If not provided, the expectation will
+be fulfilled by the first change to the key path of the observed object.</p>
+
+<p>@return
+Creates and returns an expectation associated with the test case.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTextCase+AsynchronousTesting.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/expectationForNotification:object:handler:" title="expectationForNotification:object:handler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/expectationForNotification:object:handler:">&ndash;&nbsp;expectationForNotification:object:handler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method expectationForNotification:object:handler:</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (XCTestExpectation *)expectationForNotification:(NSString *)<em>notificationName</em> object:(id)<em>objectToObserve</em> handler:(XCNotificationExpectationHandler)<em>handlerOrNil</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method expectationForNotification:object:handler:</p>
+
+<p>@discussion
+A convenience method for asynchronous tests that observe NSNotifications.</p>
+
+<p>@param notificationName
+The notification to register for.</p>
+
+<p>@param objectToObserve
+The object to observe.</p>
+
+<p>@param handlerOrNil
+Optional handler, /see <a href="../Blocks/XCNotificationExpectationHandler.html">XCNotificationExpectationHandler</a>. If not provided, the expectation
+will be fulfilled by the first notification matching the specified name from the
+observed object.</p>
+
+<p>@return
+Creates and returns an expectation associated with the test case.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTextCase+AsynchronousTesting.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="XCTestSuiteExtensions Methods" name="task_XCTestSuiteExtensions Methods"></a>
+						<h2 class="task-title">XCTestSuiteExtensions Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/defaultTestSuite" title="defaultTestSuite"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultTestSuite">+&nbsp;defaultTestSuite</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +defaultTestSuite
+Returns a test suite containing test cases for all of the tests in the class.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (XCTestSuite *)defaultTestSuite</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +defaultTestSuite
+Returns a test suite containing test cases for all of the tests in the class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setUp" title="setUp"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setUp">+&nbsp;setUp</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +setUp
+Setup method called before the <a href="#//api/name/invocation">invocation</a> of any test method in the class.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setUp</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +setUp
+Setup method called before the <a href="#//api/name/invocation">invocation</a> of any test method in the class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/tearDown" title="tearDown"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tearDown">+&nbsp;tearDown</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@method +testDown
+Teardown method called after the <a href="#//api/name/invocation">invocation</a> of every test method in the class.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)tearDown</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@method +testDown
+Teardown method called after the <a href="#//api/name/invocation">invocation</a> of every test method in the class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XCTestCase.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Apple. All rights reserved. Updated: 2015-03-10</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
